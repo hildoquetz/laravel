@@ -14,7 +14,7 @@
                             <div class="vote">
                                 <strong>{{ $question->votes}}</strong> {{ str_plural('vote', $question->votes) }}
                             </div>
-                            <div class="satus">
+                            <div class="status {{ $question->status }}">
                                     <strong>{{ $question->answers }}</strong> {{ str_plural('answer', $question->answers) }}
                             </div>
                             <div class="view">
@@ -34,8 +34,8 @@
                             </p>
                             {{ str_limit($question->body, 250) }}
                         </div>
-                        <hr/>
                     </div>
+                    <hr/>
                     @endforeach
                     <div class="text-center"></div>
                     {{ $questions->links() }}
