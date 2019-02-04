@@ -34,7 +34,7 @@
                         <div class="media-body">
                             <div class="d-flex align-items-center">
                                 <h3 class="mt-0">
-                                    <a href="{{ route("questions.show", $question->id) }}">
+                                    <a href="{{ $question->url }}">
                                         {{ $question->title }}
                                     </a>
                                 </h3>
