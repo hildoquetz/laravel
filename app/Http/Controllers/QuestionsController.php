@@ -53,7 +53,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        $question->body;    
     }
 
     /**
