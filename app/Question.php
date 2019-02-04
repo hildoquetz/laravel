@@ -15,16 +15,16 @@ class Question extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setTitleAtribute($value) {
-        $this->atributes['title'] = $value;
-        $this->atributes['slug'] = str_slug($value, '_');
+    public function setTitleAttribute($val) {
+        $this->attributes['title'] = $val;
+        $this->attributes['slug'] = str_slug($val, '_');
     }
     
-    public function getUrlAtribute() {
+    public function getUrlAttribute() {
         return route("questions.show", $this->slug);
     }
 
-    public function getCreatedDateAtribute() {
+    public function getCreatedDateAttribute() {
         return $this->created_at->diffForHumans();
     }
 
