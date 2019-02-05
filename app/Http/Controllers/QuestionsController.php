@@ -66,9 +66,10 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        if(\Gate::allows('update-question', $question)) {
-            return view('questions.edit', compact('question'));
+        if(\Gate::danies('update-question', $question)) {
+            abort(403, 'Access danied.');
         }
+        return view('questions.edit', compact('question'));
         
     }
 
@@ -94,7 +95,11 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        $question->delete();
-        return redirect()->route('questions.index')->with('success', 'Question has been deleted');
+
+        if(\Gate::allows('delete-question', $question)) {
+            $question->delete();
+            return redirect()->route('questions.index')->with('success', 'Question has been deleted');
+        }
+        abort(403, 'Access danied.');
     }
 }
