@@ -18,7 +18,7 @@
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
                             <span class="votes-count off">31</span>
-                            <a href="" title="Mark this answer as the best" class="vote-accepted mt-2">
+                            <a href="" title="Mark this answer as the best" class="{{ $answer->status }} mt-2">
                                 <i class="fas fa-check fa-2x"></i>
                                 <span class="favorites-count">1</span>
                             </a>
