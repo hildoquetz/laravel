@@ -18,10 +18,26 @@
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
                             <span class="votes-count off">31</span>
-                            <a href="" title="Mark this answer as the best" class="{{ $answer->status }} mt-2">
-                                <i class="fas fa-check fa-2x"></i>
-                                <span class="favorites-count">1</span>
-                            </a>
+                            @can('accept', $answer)
+                                <a href="" title="Mark this answer as the best" 
+                                class="{{ $answer->status }} mt-2"
+                                onclick="event.preventDefault(); document.getElementById('accepted-answer-{{ $answer->id }}').submit();">
+                                    <i class="fas fa-check fa-2x"></i>
+                                    <span class="favorites-count">1</span>
+                                </a>
+                                <form id="accepted-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST">
+                                    @csrf
+                                </form>
+                            @else
+                                @if($answer->is_best)
+                                    <a href="" title="The question owner accept this answer as the best" 
+                                    class="{{ $answer->status }} mt-2">
+                                        <i class="fas fa-check fa-2x"></i>
+                                        <span class="favorites-count">1</span>
+                                    </a>
+                                @endif
+
+                            @endcan
                         </div>
                         <div class="media-body">
                             {!! $answer->body_html !!}
