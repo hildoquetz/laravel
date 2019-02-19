@@ -27,10 +27,18 @@
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
                             <span class="votes-count off">31</span>
-                            <a href="" title="Click to mark as favorite" class="favorite mt-2">
+                            <a href="" title="Click to mark as favorite" 
+                            class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}"
+                            onclick="event.preventDefault(); document.getElementById('favorite-question-{{ $question->id }}').submit();" >
                                 <i class="fas fa-star fa-2x"></i>
-                                <span class="favorites-count">1</span>
+                                <span class="favorites-count">{{ $question->favorites_count }}</span>
                             </a>
+                            <form id="favorite-question-{{ $question->id }}" action="/questions/{{ $question->id }}/favorites" method="POST">
+                                @csrf
+                                @if($question->is_favorited)
+                                    @method('DELETE')
+                                @endif
+                            </form>
                         </div>
                         <div class="media-body">
                             {!! $question->body_html !!}
@@ -55,6 +63,6 @@
         'answers'       => $question->answers,
         'answersCount'  => $question->answers_count,
     ])
-    @include('answers._create');
+    @include('answers._create')
 </div>
 @endsection
